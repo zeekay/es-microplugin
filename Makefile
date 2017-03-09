@@ -1,10 +1,11 @@
 .PHONY: compile test test-ci release
 
-MOCHA=node_modules/.bin/mocha
 COVERALLS=node_modules/.bin/coveralls
-_MOCHA=node_modules/.bin/_mocha
+HANDROLL=node_modules/.bin/handroll
 ISTANBUL=node_modules/.bin/istanbul
+MOCHA=node_modules/.bin/mocha
 UGLIFYJS=node_modules/.bin/uglifyjs
+_MOCHA=node_modules/.bin/_mocha
 
 OUT=microplugin.js
 OUT_MIN=microplugin.min.js
@@ -13,7 +14,7 @@ BANNER=/*! microplugin.js | https://github.com/brianreavis/microplugin.js | Apac
 all: compile
 
 compile:
-	@cp src/microplugin.js $(OUT)
+	$(HANDROLL) src/index.js --format lib
 	$(UGLIFYJS) --mangle -b beautify=false,ascii-only=true --output $(OUT_MIN) $(OUT)
 	@echo "$(BANNER)" | cat - $(OUT_MIN) > temp && mv temp $(OUT_MIN)
 	@echo "`cat $(OUT_MIN) | gzip -9f | wc -c` bytes (gzipped)"

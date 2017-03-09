@@ -1,5 +1,3 @@
-'use strict';
-
 var isActualNaN;
 var isArgs;
 var isFn;
@@ -222,5 +220,5 @@ MicroPlugin.mixin = function(Interface) {
     };
 };
 
-module.exports = MicroPlugin;
-//# sourceMappingURL=microplugin.js.map
+export default MicroPlugin;
+//# sourceMappingURL=microplugin.mjs.map

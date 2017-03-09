@@ -1,109 +1,3 @@
-'use strict';
-
-var isActualNaN;
-var isArgs;
-var isFn;
-var objProto;
-var owns;
-var symbolValueOf;
-var toStr;
-
-objProto = Object.prototype;
-
-owns = objProto.hasOwnProperty;
-
-toStr = objProto.toString;
-
-symbolValueOf = void 0;
-
-if (typeof Symbol === 'function') {
-  symbolValueOf = Symbol.prototype.valueOf;
-}
-
-isActualNaN = function(value) {
-  return value !== value;
-};
-
-var isEqual = function(value, other) {
-  var key, type;
-  if (value === other) {
-    return true;
-  }
-  type = toStr.call(value);
-  if (type !== toStr.call(other)) {
-    return false;
-  }
-  if (type === '[object Object]') {
-    for (key in value) {
-      if (!isEqual(value[key], other[key]) || !(key in other)) {
-        return false;
-      }
-    }
-    for (key in other) {
-      if (!isEqual(value[key], other[key]) || !(key in value)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  if (type === '[object Array]') {
-    key = value.length;
-    if (key !== other.length) {
-      return false;
-    }
-    while (key--) {
-      if (!isEqual(value[key], other[key])) {
-        return false;
-      }
-    }
-    return true;
-  }
-  if (type === '[object Function]') {
-    return value.prototype === other.prototype;
-  }
-  if (type === '[object Date]') {
-    return value.getTime() === other.getTime();
-  }
-  return false;
-};
-
-var isArrayLike = function(value) {
-  return !!value && !isBool(value) && owns.call(value, 'length') && isFinite(value.length) && isNumber(value.length) && value.length >= 0;
-};
-
-var isArguments = isArgs = function(value) {
-  var isOldArguments, isStandardArguments;
-  isStandardArguments = toStr.call(value) === '[object Arguments]';
-  isOldArguments = !isArray(value) && isArrayLike(value) && isObject(value) && isFn(value.callee);
-  return isStandardArguments || isOldArguments;
-};
-
-var isArray = Array.isArray || function(value) {
-  return toStr.call(value) === '[object Array]';
-};
-
-var isBool = function(value) {
-  return toStr.call(value) === '[object Boolean]';
-};
-
-var isFunction = isFn = function(value) {
-  var isAlert, str;
-  isAlert = typeof window !== 'undefined' && value === window.alert;
-  if (isAlert) {
-    return true;
-  }
-  str = toStr.call(value);
-  return str === '[object Function]' || str === '[object GeneratorFunction]' || str === '[object AsyncFunction]';
-};
-
-var isNumber = function(value) {
-  return toStr.call(value) === '[object Number]';
-};
-
-var isObject = function(value) {
-  return toStr.call(value) === '[object Object]';
-};
-
 /**
  * microplugin.js
  * Copyright (c) 2013 Brian Reavis & contributors
@@ -119,6 +13,8 @@ var isObject = function(value) {
  *
  * @author Brian Reavis <brian@thirdroute.com>
  */
+
+import {isArray} from 'es-is';
 
 const MicroPlugin = {};
 
@@ -222,5 +118,4 @@ MicroPlugin.mixin = function(Interface) {
     };
 };
 
-module.exports = MicroPlugin;
-//# sourceMappingURL=microplugin.js.map
+export default MicroPlugin;
