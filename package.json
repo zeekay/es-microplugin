@@ -1,5 +1,5 @@
 {
-  "name": "microplugin",
+  "name": "es-microplugin",
   "keywords": [
     "extensibility",
     "plugins",
@@ -15,7 +15,7 @@
   "js:next": "microplugin.mjs",
   "repository": {
     "type": "git",
-    "url": "git://github.com/brianreavis/microplugin.js.git"
+    "url": "git://github.com/zeekay/es-microplugin.git"
   },
   "dependencies": {
     "es-is": "3.2.1"
