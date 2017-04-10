@@ -14,7 +14,7 @@
  * @author Brian Reavis <brian@thirdroute.com>
  */
 
-import {isArray} from 'es-is';
+import isArray from 'es-is/array';
 
 const MicroPlugin = {};
 

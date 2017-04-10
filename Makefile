@@ -14,7 +14,8 @@ BANNER=/*! microplugin.js | https://github.com/brianreavis/microplugin.js | Apac
 all: compile
 
 compile:
-	$(HANDROLL) src/index.js --format lib
+	$(HANDROLL) src/index.js --format cjs --dest microplugin.js
+	$(HANDROLL) src/index.js --format es  --dest microplugin.mjs
 	$(UGLIFYJS) --mangle -b beautify=false,ascii-only=true --output $(OUT_MIN) $(OUT)
 	@echo "$(BANNER)" | cat - $(OUT_MIN) > temp && mv temp $(OUT_MIN)
 	@echo "`cat $(OUT_MIN) | gzip -9f | wc -c` bytes (gzipped)"
