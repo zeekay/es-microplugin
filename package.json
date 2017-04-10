@@ -8,7 +8,7 @@
     "dependencies"
   ],
   "description": "A lightweight plugin / dependency system for javascript libraries.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Brian Reavis <brian@thirdroute.com>",
   "main": "microplugin.js",
   "module": "microplugin.mjs",
